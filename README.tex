@@ -1,3 +1,9 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
 \begin{document}
 
 \title{Newtonsolver !not yet ready to use}
@@ -63,7 +69,7 @@ $$\begin{pmatrix}
 \frac{\partial g_2}{\partial x_1}&\frac{\partial g_2}{\partial x_2}&\dots&\vdots\\
 \vdots&\vdots&\ddots&\vdots\\
 \frac{\partial g_n}{\partial x_1}&\dots&\dots&\frac{\partial g_n}{\partial x_n}
-\end{pmatrix}\Bvert_{x=x_n}^{}  \begin{pmatrix}
+\end{pmatrix}\vert_{x=x_n}^{}  \begin{pmatrix}
 \Delta x_1\\
 \Delta x_2\\
 \vdots\\
@@ -81,10 +87,8 @@ $$\frac{\partial g}{\partial x_n} \vert_{x=\xi}^{} = \lim_{\Delta x \to 0} \frac
 to calculate the derivative numerically
 we just say:
 
-$$\frac{\partial g}{\partial x_n} \vert_{x=\xi}^{} \approx  \frac{g(\dots,\xi_{n-1},\xi_{n}+10^{-10},\xi_{n+1},\dots ) - g(\dots,\xi_{n-1},\xi_{n},\xi_{n+1},\dots )}{10^{-10}$$
+$$\frac{\partial g}{\partial x_n} \vert_{x=\xi}^{} \approx  \frac{g(\dots,\xi_{n-1},\xi_{n}+10^{-10},\xi_{n+1},\dots ) - g(\dots,\xi_{n-1},\xi_{n},\xi_{n+1},\dots )}{10^{-10}}$$
 
 
 \end{document}
-
-
 
