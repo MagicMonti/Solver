@@ -3,17 +3,20 @@
 
 class LinearSolver {
    public:
-      LinearSolver(const int* size);
+      //LinearSolver(void);
       ~LinearSolver(void);//define the destructor
 
       void solveLinearSystem();
       void generateData(void);
       void printData(void);
+      void clearData(void);
+      void setSize(int size);
    protected:
       double getRandomNumber();
       void simplify(void);
-      void eliminate(void);
-      const int* size;
+      void echelon_form(void);
+      void solve(void);
+      int size;
       double** array;
 
 };
