@@ -127,7 +127,7 @@ void LinearSolver::solve(){
                         this->printData();
                         std::cout << std::endl;
                 }
-                if (factor != 1){
+                if (factor != 1 && factor != 0){
                     for (int k = i+1 ; k <= this->size ; k++){
                         array[i+1][k] = array[i+1][k] * factor;
                     }
@@ -136,8 +136,10 @@ void LinearSolver::solve(){
                         std::cout << std::endl;
                     }
                 }
-                for (int k = x+1 ; k <= this->size ; k++){
-                    array[x][k] = array[x][k] - array[i+1][k];
+                if (factor != 0){
+                    for (int k = x+1 ; k <= this->size ; k++){
+                        array[x][k] = array[x][k] - array[i+1][k];
+                    }
                 }
             }
             if (DEBUG){

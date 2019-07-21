@@ -1,7 +1,7 @@
-g++ LinearSolver.cpp main.cpp
+g++ LinearSolver.cpp Newton.cpp main.cpp
 file="a.out"
 if [ -f "$file" ]
-then 
+then
 	mv "$file" solver
 fi
 ./solver
