@@ -1,6 +1,7 @@
 #include "Newton.h"
-#include <iostream>
 #include <math.h>
+#include <iostream>
+#define DEBUG false
 
 Newton::Newton(int size){
     this->size = size;
@@ -13,7 +14,7 @@ Newton::Newton(int size){
 Newton::~Newton() {
     delete [] this->model;
     this->linearSolver->clearData();
-    delete [] this->linearSolver;
+    delete this->linearSolver;
 }
 
 */
@@ -24,42 +25,63 @@ void Newton::init(double* initGuess){
 
 void Newton::solveModel(){
     this->createJacobian(this->initGuess);
-    this->linearSolver->printData();
-    std::cout << std::endl;
-    this->linearSolver->solveLinearSystem();
-    this->linearSolver->printData();
-    //new initGuess are the solutions form the previous EqS;
-    std::cout << std::endl;
-    for (int j = 0 ; j < 5 ; j++){
-    for(int i = 0 ; i < this->size; i++){
-        //x_(n+1) = deltaX + x_n
-        this->initGuess[i] = this->linearSolver->array[i][this->size] + this->initGuess[i];
-        std::cout << initGuess[i] << ", ";
+    if (DEBUG){
+        this->linearSolver->printData();
+        std::cout << std::endl;
     }
-    std::cout << std::endl;
-    this->createJacobian(this->initGuess);
-    this->linearSolver->printData();
-    std::cout << std::endl;
     this->linearSolver->solveLinearSystem();
-    this->linearSolver->printData();
-    std::cout << std::endl;
+    if (DEBUG){
+        this->linearSolver->printData();
+        //new initGuess are the solutions form the previous EqS;
+        std::cout << std::endl;
+    }
+    while (true){
+        for(int i = 0 ; i < this->size; i++){
+            //x_(n+1) = deltaX + x_n
+            this->initGuess[i] = this->linearSolver->array[i][this->size] + this->initGuess[i];
+            if (DEBUG){
+                std::cout<< initGuess[i] << "," << std::endl;
+            }
+        }
+        this->createJacobian(this->initGuess);
+
+        if (DEBUG){
+            this->linearSolver->printData();
+            std::cout << std::endl;
+        }
+        this->linearSolver->solveLinearSystem();
+
+        if (DEBUG){
+            this->linearSolver->printData();
+            std::cout << std::endl;
+        }
+        
+        int trigger = 0;
+        for(int i = 0 ; i < this->size; i++){
+            if (std::abs(this->function(this->initGuess)[i]) < pow(10,-5)){
+                trigger++;
+            }
+        }
+        if (trigger == this->size){
+            break;
+        }
+    }
+
+    for(int i = 0 ; i < this->size; i++){
+         
+        std::cout <<"f"<< i << "(" << this->ArrayToString(this->initGuess, this->size) << ")=" << this->function(this->initGuess)[i]  <<"~ "<< round(function(this->initGuess)[i]) << std::endl;
     }
 }
+
 double Newton::calculateDerivative(double* x, int index1, int index2){
-    double* point1 = new double[this->size];
-    double* point2 = new double[this->size];
-    for (int i = 0; i < this->size ; i++){
-        if (i == index1){
-            point1[i] =  x[i] + pow(10,-10);
-        }
-        else{
-            point1[i] = x[i];
-        }
-        point2[i] = x[i];
+    double* point = new double[this->size];
+    for (int i = 0 ; i < this->size; i++){
+        point[i] = x[i];
     }
-    double result = (this->function(point1)[index2]-this->function(point2)[index2])/pow(10,-10);
-    delete [] point1;
-    delete [] point2;
+    point[index1] = point[index1] + pow(10,-10);
+
+    double result = (this->function(point)[index2]-this->function(x)[index2])/pow(10,-10);
+    delete [] point;
     return result;
 }
 void Newton::createJacobian(double* x){
@@ -70,7 +92,7 @@ void Newton::createJacobian(double* x){
             if (j == this->size){
                 linearSolver->array[i][j] = -this->function(x)[i];
             }else{
-                linearSolver->array[i][j] = this->calculateDerivative(x,i,j);
+                linearSolver->array[i][j] = this->calculateDerivative(x,j,i);
             }
         }
     }
@@ -78,4 +100,12 @@ void Newton::createJacobian(double* x){
 
 void Newton::clearModel(){
 
+}
+
+std::string Newton::ArrayToString(double* array, int size){
+    std::string str = "";
+    for (int i = 0 ; i < size ; i++){
+        str = str + std::to_string(array[i]) +  "," ;
+    }
+    return str;
 }

@@ -1,4 +1,5 @@
 #include "LinearSolver.h"
+#include <iostream>
 
 class Newton {
    public:
@@ -15,5 +16,7 @@ class Newton {
        double calculateDerivative(double* x, int index1, int index2);
        LinearSolver* linearSolver = nullptr;
        void createJacobian(double* x);
+       std::string ArrayToString(double* array, int size);
+       double* copyArray(double* array);
 
 };

@@ -71,7 +71,7 @@ void LinearSolver::simplify(){
 void LinearSolver::echelon_form(){
     int rowNumberWithFirstOne = 0;
     int columnNumberWithFirstOne = 0;
-    for (int x = 0 ; x < this->size+1; x++){
+    for (int x = 0 ; x <this->size+1; x++){
         for (int j = columnNumberWithFirstOne ; j <this->size-1 ; j++){
             for (int i = rowNumberWithFirstOne ; i <this->size-1; i++){
                 if (array[i][j] == 1){
@@ -112,6 +112,7 @@ void LinearSolver::echelon_form(){
 void LinearSolver::solve(){
 
     double factor = 0;
+    double oneBelow = 0;
     //std::cout << "test" << std::endl;
     for (int x = 0 ; x < this->size-1; x++){
         for (int i = 0; i < this->size-1 ; i++){
@@ -120,6 +121,7 @@ void LinearSolver::solve(){
                     i++; //factor lands on a diagonal element;
                 }
                 factor = array[x][i+1];
+                oneBelow = array[x+1][i+1]; //oneBelow is the element below the factor element
                 if (DEBUG){
                         std::cout << "factor:" << factor << std::endl;
                         std::cout << "x[row]: " << x << std::endl;
@@ -136,7 +138,7 @@ void LinearSolver::solve(){
                         std::cout << std::endl;
                     }
                 }
-                if (factor != 0){
+                if (factor != 0 && oneBelow != 0){
                     for (int k = x+1 ; k <= this->size ; k++){
                         array[x][k] = array[x][k] - array[i+1][k];
                     }
