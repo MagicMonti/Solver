@@ -1,9 +1,7 @@
-{::nomarkdown}
   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
   "http://www.w3.org/TR/html4/loose.dtd">  
 <html > 
-<head><title>Newtonsolver !not yet ready to use</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
 <meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
 <meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
@@ -16,13 +14,7 @@
 
 
 
-<h2 class="titleHead">Newtonsolver !not yet ready to use</h2>
-<div class="author" ><span 
-class="cmr-12">Julian K</span><span 
-class="cmr-12">öberle</span></div><br />
-<div class="date" ><span 
-class="cmr-12">July 10, 2019</span></div>
-   </div>
+<h2 class="titleHead">Newtonsolver </h2>
 <!--l. 16--><p class="indent" >   let&#8217;s define a function
 <!--l. 18--><p class="indent" >
    <center class="math-display" >
