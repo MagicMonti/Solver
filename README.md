@@ -15,12 +15,6 @@
 
 
 <h2 class="titleHead">Newtonsolver </h2>
-<div class="author" ><span 
-class="cmr-12">Julian K</span><span 
-class="cmr-12">öberle</span></div><br />
-<div class="date" ><span 
-class="cmr-12">July 10, 2019</span></div>
-   </div>
 <!--l. 16--><p class="indent" >   let&#8217;s define a function
 <!--l. 18--><p class="indent" >
    <center class="math-display" >
