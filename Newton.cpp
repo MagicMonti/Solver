@@ -1,7 +1,18 @@
 #include "Newton.h"
 #include <math.h>
 #include <iostream>
+#include <sstream>
 #define DEBUG false
+
+
+template <typename T>
+std::string to_string_with_precision(const T a_value, const int n = 5)
+{
+    std::ostringstream out;
+    out.precision(n);
+    out << std::fixed << a_value;
+    return out.str();
+}
 
 Newton::Newton(int size){
     this->size = size;
@@ -68,7 +79,7 @@ void Newton::solveModel(){
     }
 
     for(int i = 0 ; i < this->size; i++){
-         
+        std::cout.precision(20);
         std::cout <<"f"<< i << "(" << this->ArrayToString(this->initGuess, this->size) << ")=" << this->function(this->initGuess)[i]  <<"~ "<< round(function(this->initGuess)[i]) << std::endl;
     }
 }
@@ -102,10 +113,11 @@ void Newton::clearModel(){
 
 }
 
+
 std::string Newton::ArrayToString(double* array, int size){
     std::string str = "";
     for (int i = 0 ; i < size ; i++){
-        str = str + std::to_string(array[i]) +  "," ;
+        str = str + to_string_with_precision(array[i],10) +  "," ;
     }
     return str;
 }

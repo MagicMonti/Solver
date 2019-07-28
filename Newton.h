@@ -18,5 +18,4 @@ class Newton {
        void createJacobian(double* x);
        std::string ArrayToString(double* array, int size);
        double* copyArray(double* array);
-
 };
